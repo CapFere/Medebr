@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Home";
+    Layout = "_Layout";
+}
+@model ShoppingCartViewModel
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="cart-title mt-50">
+                    <h2>Shopping Cart</h2>
+                </div>
+
+                <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                            {
+                                var base641 = Convert.ToBase64String(line.Product.Image1);
+                                var img1Src = string.Format("data:image/jpg;base64,{0}", base641);
+                                <tr>
+                                    <td class="cart_product_img">
+                                        <a href="#"><img src="@img1Src" alt="Product"></a>
+                                    </td>
+                                    <td class="cart_product_desc">
+                                        <h5>@line.Product.Name</h5>
+                                    </td>
+                                    <td class="price">
+                                        <span>@line.Product.Price.ToString("c")</span>
+                                    </td>
+                                    <td class="qty">
+                                        <div class="qty-btn d-flex">
+                                            <p>Qty</p>
+                                            <div class="quantity">                                               
+                                                <input type="number" class="qty-text" id="qty2" step="1" min="0" max="300" name="quantity" value="@line.Amount">
+                                                <a  asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@line.Product.ProductId" class="qty-plus">&times;</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                    <h5>Cart Total</h5>
+                    <ul class="summary-table">
+                        <li><span>total:</span> <span>@Model.ShoppingCartTotal.ToString("c")</span></li>
+                    </ul>
+                    <div class="cart-btn mt-100">
+                        <a asp-controller="Cart" asp-action="Checkout" class="btn amado-btn w-100">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

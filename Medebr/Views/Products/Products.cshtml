@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Home";
+    Layout = "_Layout";
+}
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+@model IEnumerable<Product>
+<div class="amado_product_area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            @if (Model.Count() == 0)
+            {
+                <h1>No Product Available</h1>
+            }
+            else
+            {
+                @foreach (var product in Model)
+                {
+                    var base641 = Convert.ToBase64String(product.Image1);
+                    var img1Src = string.Format("data:image/jpg;base64,{0}", base641);
+                    var base642 = Convert.ToBase64String(product.Image2);
+                    var img2Src = string.Format("data:image/jpg;base64,{0}", base642);
+                    <!-- Single Product Area -->
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <img src="@img1Src" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="@img2Src" alt="">
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price">$@product.Price</p>
+                                    <a asp-controller="Products" asp-action="Product" asp-route-id="@product.ProductId">
+                                        <h6>@product.Name</h6>
+                                    </a>
+                                </div>
+                                <!-- Ratings & Cart -->
+                                <div class="ratings-cart text-right">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        @if (User.IsInRole("USER"))
+                                        {
+                                            <div class="cart">
+                                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.ProductId" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="~/img/core-img/cart.png" alt=""></a>
+                                            </div>
+                                        }
+                                        
+
+                                    }
+                                    else
+                                    {
+                                        <div class="cart">
+                                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.ProductId" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="~/img/core-img/cart.png" alt=""></a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+</div>

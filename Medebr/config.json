@@ -1,0 +1,5 @@
+{
+    "ConnectionStrings": {
+        "MedebrConnectionString": "server=(localdb)\\ProjectsV13;Database=MedebrAspDB;Integrated Security=true;MultipleActiveResultSets=true"
+    }
+}

@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Home";
+    Layout = "_Layout";
+}
+@model Product
+@{
+    var base641 = Convert.ToBase64String(Model.Image1);
+    var img1Src = string.Format("data:image/jpg;base64,{0}", base641);
+    var base642 = Convert.ToBase64String(Model.Image2);
+    var img2Src = string.Format("data:image/jpg;base64,{0}", base642);
+    var base643 = Convert.ToBase64String(Model.Image3);
+    var img3Src = string.Format("data:image/jpg;base64,{0}", base643);
+    var base644 = Convert.ToBase64String(Model.Image4);
+    var img4Src = string.Format("data:image/jpg;base64,{0}", base644);
+}
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+<!-- Product Details Area Start -->
+<div class="single-product-area section-padding-100 clearfix">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(@img1Src);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(@img2Src);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(@img3Src);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(@img4Src);">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img" href="@img1Src">
+                                    <img class="d-block w-100" src="@img1Src" alt="First slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@img2Src">
+                                    <img class="d-block w-100" src=@img2Src alt="Second slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@img3Src">
+                                    <img class="d-block w-100" src="@img3Src" alt="Third slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@img4Src">
+                                    <img class="d-block w-100" src="@img4Src" alt="Fourth slide">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="single_product_desc">
+                    <!-- Product Meta Data -->
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+                        <p class="product-price">$@Model.Price</p>
+                        <a href="product-details.html">
+                            <h6>@Model.Name</h6>
+                        </a>
+
+                    </div>
+
+                    <div class="short_overview my-5">
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <!-- Add to Cart Form -->
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("USER"))
+                        {
+                            <form class="cart clearfix" method="post">
+                                <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ProductId" type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                            </form>
+                        }
+
+
+                    }
+                    else
+                    {
+                        <form class="cart clearfix" method="post">
+                            <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ProductId" type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                        </form>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Details Area End -->

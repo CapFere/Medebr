@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Add Produts";
+    Layout = "_Layout";
+}
+@model User
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-50 clearfix">
+
+                    <div class="cart-title">
+                        <h2>Login</h2>
+                    </div>
+
+                    <form asp-controller="Account" asp-action="Login" method="post">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <input type="text" asp-for="UserName" class="form-control" id="product_name" placeholder="Username">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="UserName"></span>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="password" asp-for="Password" class="form-control" id="product_name" placeholder="Password">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Password"></span>
+                            </div>
+                            <input type="hidden" asp-for="Email" value="fere@gmail.com"/>
+                            <div class="cart-btn col-12 mt-15">
+                                <input type="submit" class="btn amado-btn w-100" value="Login" />
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

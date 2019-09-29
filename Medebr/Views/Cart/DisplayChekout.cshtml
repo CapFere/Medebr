@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Home";
+    Layout = "_Layout";
+}
+@model List<Checkout>
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="cart-title mt-50">
+                    <h2>Checkouts</h2>
+                </div>
+
+                <div class="cart-table clearfix">
+                    @foreach (var line in Model)
+                    {
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+                                    <td class="cart_product_img">
+                                        <h5>@line.Order.FirstName</h5>
+                                    </td>
+                                    <td class="cart_product_desc">
+                                        <h5>@line.Order.LastName</h5>
+                                    </td>
+                                    <td class="price">
+                                        <h5>@line.Order.PhoneNumber</h5>
+                                    </td>
+                                    <td class="price">
+                                        <h5>@line.Order.Address</h5>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Product Id</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in line.Products)
+                                {
+                                    var base641 = Convert.ToBase64String(item.Image1);
+                                    var img1Src = string.Format("data:image/jpg;base64,{0}", base641);
+                                    <tr>
+                                        <td class="cart_product_img">
+                                            <a href="#"><img src="@img1Src" alt="Product"></a>
+                                        </td>
+                                        <td class="cart_product_desc">
+                                            <h5>@item.Name</h5>
+                                        </td>
+                                        <td class="price">
+                                            <h5>@item.Price.ToString("c")</h5>
+                                        </td>
+                                        <td class="p">
+                                            <span>@item.ProductId</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        
+                    }
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

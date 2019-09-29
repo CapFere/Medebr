@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Medebr - Ethiopian E-Commerce | Add Produts";
+    Layout = "_Layout";
+}
+@model Product
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-50 clearfix">
+
+                    <div class="cart-title">
+                        <h2>Add Product</h2>
+                        <p style="color:green;">@ViewBag.Success</p>
+                    </div>
+
+                    <form asp-controller="Products" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+                        <div class="row">                          
+                            <div class="col-md-6 mb-3">
+                                <input type="text" asp-for="Name" class="form-control" id="product_name" placeholder="Product Name">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="number" asp-for="Price" class="form-control" id="price" placeholder="Price">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Price"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <select class="w-100" asp-for="Catagory" id="country">
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="Shoes">Shoes</option>
+                                    <option value="Cosmotics">Cosmotics</option>
+                                    <option value="Watch">Watch</option>
+                                    <option value="EarPhone">Ear Phones</option>
+                                    <option value="CellPhone">Cell Phones</option>
+                                    <option value="TShirt">T-Shirt</option>
+                                    <option value="Clothing">Clothing</option>
+                                    <option value="Camera">Camera</option>
+                                </select>
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Catagory"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="file" asp-for="Image1" class="form-control mb-3" id="street_address">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Image1"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="file" asp-for="Image2" class="form-control mb-3" id="street_address2">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Image2"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="file" asp-for="Image3" class="form-control mb-3" id="street_address2">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Image3"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="file" asp-for="Image4" class="form-control mb-3" id="street_address4">
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Image4"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea asp-for="Description" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Description"></textarea>
+                                <span style="color:red; font-size:0.6em;" asp-validation-for="Description"></span>
+                            </div>
+                            <div class="cart-btn mt-15">
+                                <input type="submit" class="btn amado-btn w-100" value="Save" />
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>         
+        </div>
+    </div>
+</div>
